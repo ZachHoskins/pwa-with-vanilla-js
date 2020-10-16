@@ -12,20 +12,20 @@ const assets = [
   "/images/coffee6.jpg",
   "/images/coffee7.jpg",
   "/images/coffee8.jpg",
-  "/images/coffee9.jpg"
+  "/images/coffee9.jpg",
 ];
 
-self.addEventListener("install", installEvent => {
+self.addEventListener("install", (installEvent) => {
   installEvent.waitUntil(
-    caches.open(staticDevCoffee).then(cache => {
+    caches.open(staticDevCoffee).then((cache) => {
       cache.addAll(assets);
     })
   );
 });
 
-self.addEventListener("fetch", fetchEvent => {
+self.addEventListener("fetch", (fetchEvent) => {
   fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then(res => {
+    caches.match(fetchEvent.request).then((res) => {
       return res || fetch(fetchEvent.request);
     })
   );
